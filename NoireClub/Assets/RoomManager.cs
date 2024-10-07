@@ -11,6 +11,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Debug.Log("Connecting");
 
         PhotonNetwork.ConnectUsingSettings();
+
+        // Get the local IP address if connected
+        if (PhotonNetwork.IsConnected)
+        {
+            string localIpAddress = PhotonNetwork.NetworkingClient.LoadBalancingPeer.ServerAddress;
+            Debug.Log("Local IP Address: " + localIpAddress);
+        }
+        else
+        {
+            Debug.Log("Not connected to Photon network.");
+        }
     }
 
     public override void OnConnectedToMaster()

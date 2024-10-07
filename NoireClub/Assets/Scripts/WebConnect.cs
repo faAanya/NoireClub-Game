@@ -8,9 +8,10 @@ public class WebConnect : MonoBehaviour
     void Start()
     {
         // A correct website page.
-        StartCoroutine(GetRequest("http://localhost/NoireClub/GetDate.php"));
-        StartCoroutine(GetRequest("http://localhost/NoireClub/GetPlayer.php"));
-
+        // StartCoroutine(GetRequest("http://localhost/NoireClub/GetDate.php"));
+        // StartCoroutine(GetRequest("http://localhost/NoireClub/GetPlayer.php"));
+        // StartCoroutine(LoginPlayer("Test", "12345"));
+        // StartCoroutine(RegisterPlayer("Meow", "12345"));
         // // A non-existing page.
         // StartCoroutine(GetRequest("https://error.html"));
     }
@@ -40,4 +41,42 @@ public class WebConnect : MonoBehaviour
             }
         }
     }
+
+    public IEnumerator LoginPlayer(string userName, string userPassword)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("loginUser", userName);
+        form.AddField("loginPassword", userPassword);
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/LoginPlayer.php", form);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+        }
+    }
+    public IEnumerator RegisterPlayer(string userName, string userPassword)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("loginUser", userName);
+        form.AddField("loginPassword", userPassword);
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/RegisterPlayer.php", form);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+        }
+    }
+
 }
