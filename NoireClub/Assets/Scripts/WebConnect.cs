@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class WebConnect : MonoBehaviour
 {
+    public static WebConnect Instance;
     void Start()
     {
         // A correct website page.
@@ -14,6 +15,23 @@ public class WebConnect : MonoBehaviour
         // StartCoroutine(RegisterPlayer("Meow", "12345"));
         // // A non-existing page.
         // StartCoroutine(GetRequest("https://error.html"));
+    }
+
+
+    void Awake()
+    {
+        //todo: Optimize usage of this lines
+        DontDestroyOnLoad(this);
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     IEnumerator GetRequest(string uri)
@@ -49,6 +67,7 @@ public class WebConnect : MonoBehaviour
         form.AddField("loginPassword", userPassword);
 
         using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/LoginPlayer.php", form);
+
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
@@ -57,7 +76,14 @@ public class WebConnect : MonoBehaviour
         }
         else
         {
+
             Debug.Log(www.downloadHandler.text);
+
+
+            LoginNRegisterController.Instance.userInfo.SetCredentials(userName);
+            LoginNRegisterController.Instance.userInfo.SetID(www.downloadHandler.text);
+
+
         }
     }
     public IEnumerator RegisterPlayer(string userName, string userPassword)
@@ -68,7 +94,7 @@ public class WebConnect : MonoBehaviour
 
         using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/RegisterPlayer.php", form);
         yield return www.SendWebRequest();
-
+        Debug.Log(www.result);
         if (www.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError(www.error);
