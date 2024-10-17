@@ -8,19 +8,21 @@ public class LoginUIController : MonoBehaviour
 {
 
     public TMP_InputField UsernameInput, PasswordInput;
-    public Button LoginButton;
-    public GameObject gamePlayUI;
+    public Button LoginButton, ExitButton, CreateNewUserButton;
+
+    public GameObject loginUI, registerUI, gameplayUI;
+
     void Start()
     {
+        loginUI = this.gameObject;
         LoginButton.onClick.AddListener(() =>
         {
             StartCoroutine(LoginNRegisterController.Instance.webConnect.LoginPlayer(UsernameInput.text, PasswordInput.text));
-
-            gameObject.SetActive(false);
-            gamePlayUI.SetActive(true);
-
+            StartCoroutine(LoginNRegisterController.Instance.webConnect.GetPlayerInfo(UsernameInput.text));
 
         });
+        CreateNewUserButton.onClick.AddListener(() => { loginUI.SetActive(false); registerUI.SetActive(true); });
+
     }
 
 

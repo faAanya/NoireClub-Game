@@ -1,38 +1,60 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
+[Serializable]
+public class User
+{
+    public int player_id;
 
+
+    public string player_name;
+
+    public int score;
+    public int money;
+
+}
 public class UserInfo : MonoBehaviour
 {
-    [SerializeField]
+
     public string Id { get; private set; }
 
-    [SerializeField]
-    string Name;
-    [SerializeField]
-    string Score;
-    string Money;
+
+    public string Name;
 
     public PlayerDataSO playerDataSO;
 
-    void Awake()
+    public void GetPlayerInfo()
     {
+        string userId = LoginNRegisterController.Instance.userInfo.Name;
 
+        StartCoroutine(LoginNRegisterController.Instance.webConnect.GetPlayerInfo(userId));
     }
     public void SetCredentials(string userName)
     {
         Name = userName;
-        playerDataSO.Name = Name;
 
-        if (!playerDataSO.isLogedIn)
-        {
-            playerDataSO.isLogedIn = true;
-        }
     }
 
     public void SetID(string userId)
     {
+        Id = userId;
+    }
 
+    public IEnumerator CreatePlayerRoutine(string jsonArrayString)
+    {
+        Debug.Log("Create player routine");
+        Debug.Log(jsonArrayString);
+
+        User user = JsonUtility.FromJson<User>(jsonArrayString);
+
+        playerDataSO.player_id = user.player_id;
+        playerDataSO.player_name = user.player_name;
+        playerDataSO.score = user.score;
+        playerDataSO.money = user.money;
+
+        yield return null;
     }
 }

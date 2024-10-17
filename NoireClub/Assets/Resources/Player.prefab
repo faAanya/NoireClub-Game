@@ -52,6 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDataSO: {fileID: 11400000, guid: 039ce5e27be307947abbf3106bd76e14, type: 2}
   userName: {fileID: 8592152833591464615}
+  score: {fileID: 6851473679650446277}
+  money: {fileID: 6469667455302669206}
 --- !u!1 &563770554941010821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1975,6 +1977,10 @@ MonoBehaviour:
   PasswordInput2: {fileID: 8536341020743992677}
   RegisterButton: {fileID: 3281810661020417469}
   login: {fileID: 0}
+  ExitButton: {fileID: 0}
+  loginUI: {fileID: 0}
+  gamePlayUI: {fileID: 0}
+  freeAccountSettingsPanel: {fileID: 0}
 --- !u!1 &2771686043332356273
 GameObject:
   m_ObjectHideFlags: 0
@@ -4209,7 +4215,11 @@ MonoBehaviour:
   UsernameInput: {fileID: 5624637314326848763}
   PasswordInput: {fileID: 1912923243912207338}
   LoginButton: {fileID: 4514138410731173982}
-  gamePlayUI: {fileID: 0}
+  ExitButton: {fileID: 0}
+  CreateNewUserButton: {fileID: 0}
+  loginUI: {fileID: 0}
+  registerUI: {fileID: 0}
+  gameplayUI: {fileID: 0}
 --- !u!1 &7243002379061347843
 GameObject:
   m_ObjectHideFlags: 0

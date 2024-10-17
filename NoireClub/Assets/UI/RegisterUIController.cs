@@ -10,6 +10,12 @@ public class RegisterUIController : MonoBehaviour
     public Button RegisterButton;
 
     public GameObject login;
+
+    public Button ExitButton;
+
+
+    public GameObject loginUI, gamePlayUI, freeAccountSettingsPanel;
+
     void Start()
     {
         RegisterButton.interactable = false;
@@ -17,11 +23,9 @@ public class RegisterUIController : MonoBehaviour
         RegisterButton.onClick.AddListener(() =>
         {
             StartCoroutine(LoginNRegisterController.Instance.webConnect.RegisterPlayer(UsernameInput.text, PasswordInput1.text));
-
-            //todo: Remove dependencies
-            // gameObject.SetActive(false);
-            // login.SetActive(true);
         });
+        ExitButton.onClick.AddListener(() => { gameObject.SetActive(false); freeAccountSettingsPanel.SetActive(true); });
+
     }
     private void Update()
     {

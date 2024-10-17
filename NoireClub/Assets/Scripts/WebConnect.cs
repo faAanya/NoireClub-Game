@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -60,6 +61,31 @@ public class WebConnect : MonoBehaviour
         }
     }
 
+
+    public IEnumerator GetPlayerInfo(string userName)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("loginUser", userName);
+
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/GetPlayerInfo.php", form);
+
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+
+            string jsonArray = www.downloadHandler.text;
+            StartCoroutine(LoginNRegisterController.Instance.userInfo.CreatePlayerRoutine(jsonArray));
+
+
+        }
+    }
     public IEnumerator LoginPlayer(string userName, string userPassword)
     {
         WWWForm form = new WWWForm();
@@ -79,12 +105,12 @@ public class WebConnect : MonoBehaviour
 
             Debug.Log(www.downloadHandler.text);
 
-
-            LoginNRegisterController.Instance.userInfo.SetCredentials(userName);
             LoginNRegisterController.Instance.userInfo.SetID(www.downloadHandler.text);
-
-
+            LoginNRegisterController.Instance.userInfo.SetCredentials(userName);
+            // LoginNRegisterController.Instance.Login.SetActive(false);
+            // LoginNRegisterController.Instance.GamePlay.SetActive(true);
         }
+
     }
     public IEnumerator RegisterPlayer(string userName, string userPassword)
     {
