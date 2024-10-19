@@ -3093,9 +3093,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startButton: {fileID: 1459877582}
-  shopButton: {fileID: 0}
-  accountSettingsButton: {fileID: 0}
-  AccountMenu: {fileID: 0}
+  shopButton: {fileID: 1114234216}
+  accountSettingsButton: {fileID: 1038835641}
+  AccountMenu: {fileID: 1129900579}
 --- !u!1 &865398673
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,6 @@ public class WebConnect : MonoBehaviour
         // StartCoroutine(LoginPlayer("Test", "12345"));
         // StartCoroutine(RegisterPlayer("Meow", "12345"));
         // // A non-existing page.
-        // StartCoroutine(GetRequest("https://error.html"));
     }
 
 
@@ -61,12 +60,11 @@ public class WebConnect : MonoBehaviour
         }
     }
 
-
+    #region Player
     public IEnumerator GetPlayerInfo(string userName)
     {
         WWWForm form = new WWWForm();
         form.AddField("loginUser", userName);
-
 
         using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/GetPlayerInfo.php", form);
 
@@ -81,9 +79,7 @@ public class WebConnect : MonoBehaviour
             Debug.Log(www.downloadHandler.text);
 
             string jsonArray = www.downloadHandler.text;
-            StartCoroutine(LoginNRegisterController.Instance.userInfo.CreatePlayerRoutine(jsonArray));
-
-
+            StartCoroutine(WebConnectController.Instance.userInfo.CreatePlayerRoutine(jsonArray));
         }
     }
     public IEnumerator LoginPlayer(string userName, string userPassword)
@@ -102,13 +98,7 @@ public class WebConnect : MonoBehaviour
         }
         else
         {
-
-            Debug.Log(www.downloadHandler.text);
-
-            LoginNRegisterController.Instance.userInfo.SetID(www.downloadHandler.text);
-            LoginNRegisterController.Instance.userInfo.SetCredentials(userName);
-            // LoginNRegisterController.Instance.Login.SetActive(false);
-            // LoginNRegisterController.Instance.GamePlay.SetActive(true);
+            WebConnectController.Instance.userInfo.SetID(www.downloadHandler.text, userName);
         }
 
     }
@@ -131,4 +121,52 @@ public class WebConnect : MonoBehaviour
         }
     }
 
+
+    #endregion
+
+    #region Category & Products
+
+    public IEnumerator GetCategoryName()
+    {
+        WWWForm form = new WWWForm();
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/GetCategory.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+
+            string jsonArray = www.downloadHandler.text;
+            StartCoroutine(WebConnectController.Instance.categoriesInfo.CreateCategoryRoutine(jsonArray));
+
+        }
+    }
+
+    public IEnumerator GetCategoryProduct(int categoryId)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("categoryId", categoryId);
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/GetCategoryContent.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+
+            StartCoroutine(WebConnectController.Instance.productSpawner.CreateCategoryRoutine(www.downloadHandler.text));
+        }
+    }
+
 }
+
+#endregion

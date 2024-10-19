@@ -22,7 +22,7 @@ public class RegisterUIController : MonoBehaviour
 
         RegisterButton.onClick.AddListener(() =>
         {
-            StartCoroutine(LoginNRegisterController.Instance.webConnect.RegisterPlayer(UsernameInput.text, PasswordInput1.text));
+            StartCoroutine(WebConnectController.Instance.webConnect.RegisterPlayer(UsernameInput.text, PasswordInput1.text));
         });
         ExitButton.onClick.AddListener(() => { gameObject.SetActive(false); freeAccountSettingsPanel.SetActive(true); });
 

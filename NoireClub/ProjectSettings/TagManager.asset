@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Plane
   - WebConnect
+  - Category
+  - ProductSpawner
   layers:
   - Default
   - TransparentFX

@@ -9,7 +9,6 @@ public class User
 {
     public int player_id;
 
-
     public string player_name;
 
     public int score;
@@ -28,19 +27,15 @@ public class UserInfo : MonoBehaviour
 
     public void GetPlayerInfo()
     {
-        string userId = LoginNRegisterController.Instance.userInfo.Name;
+        string userId = WebConnectController.Instance.userInfo.Name;
 
-        StartCoroutine(LoginNRegisterController.Instance.webConnect.GetPlayerInfo(userId));
-    }
-    public void SetCredentials(string userName)
-    {
-        Name = userName;
-
+        StartCoroutine(WebConnectController.Instance.webConnect.GetPlayerInfo(userId));
     }
 
-    public void SetID(string userId)
+    public void SetID(string userId, string userName)
     {
         Id = userId;
+        Name = userName;
     }
 
     public IEnumerator CreatePlayerRoutine(string jsonArrayString)

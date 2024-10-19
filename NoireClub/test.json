@@ -1,0 +1,12 @@
+{
+    "items": [
+        {
+            "id": "1",
+            "name": "Color"
+        },
+        {
+            "id": "2",
+            "name": "Clothes"
+        }
+    ]
+}

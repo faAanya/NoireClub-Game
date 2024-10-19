@@ -17,8 +17,8 @@ public class LoginUIController : MonoBehaviour
         loginUI = this.gameObject;
         LoginButton.onClick.AddListener(() =>
         {
-            StartCoroutine(LoginNRegisterController.Instance.webConnect.LoginPlayer(UsernameInput.text, PasswordInput.text));
-            StartCoroutine(LoginNRegisterController.Instance.webConnect.GetPlayerInfo(UsernameInput.text));
+            StartCoroutine(WebConnectController.Instance.webConnect.LoginPlayer(UsernameInput.text, PasswordInput.text));
+            StartCoroutine(WebConnectController.Instance.webConnect.GetPlayerInfo(UsernameInput.text));
 
         });
         CreateNewUserButton.onClick.AddListener(() => { loginUI.SetActive(false); registerUI.SetActive(true); });
