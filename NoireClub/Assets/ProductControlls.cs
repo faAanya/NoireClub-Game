@@ -25,10 +25,19 @@ public class ProductController : MonoBehaviour
             innerImage.color = newCol;
         }
         cost.text = product.cost.ToString();
+
+        gameObject.GetComponent<Button>().onClick.AddListener(() => { Buy(); });
     }
 
+    public void Buy()
+    {
+        StartCoroutine(WebConnectController.Instance.webConnect.ChangeMoney(product.id, product.cost));
+    }
 
+    public void Affect()
+    {
 
+    }
 }
 
 [System.Serializable]

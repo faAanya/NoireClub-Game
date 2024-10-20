@@ -13,6 +13,7 @@ public class WebConnectController : MonoBehaviour
     public Categories categoriesInfo;
 
     public ProductSpawner productSpawner;
+    public SpawnPlayerProduct productProductSpawner;
 
     // Start is called before the first frame update
     void Awake()
@@ -25,6 +26,7 @@ public class WebConnectController : MonoBehaviour
         categoriesInfo = GameObject.FindGameObjectWithTag("Category").GetComponent<Categories>();
 
         productSpawner = GameObject.FindGameObjectWithTag("ProductSpawner").GetComponent<ProductSpawner>();
+        productProductSpawner = GameObject.FindGameObjectWithTag("PlayerProductSpawner").GetComponent<SpawnPlayerProduct>();
     }
 
 

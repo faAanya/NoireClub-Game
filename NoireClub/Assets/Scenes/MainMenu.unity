@@ -779,7 +779,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1554117044}
+      - m_Target: {fileID: 849060109}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -2877,6 +2877,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   webConnect: {fileID: 1826550924}
   userInfo: {fileID: 1826550926}
+  categoriesInfo: {fileID: 0}
+  productSpawner: {fileID: 0}
 --- !u!1 &831156035
 GameObject:
   m_ObjectHideFlags: 0
@@ -3023,7 +3025,6 @@ GameObject:
   m_Component:
   - component: {fileID: 849060110}
   - component: {fileID: 849060111}
-  - component: {fileID: 849060112}
   m_Layer: 5
   m_Name: GamePlayButtons
   m_TagString: Untagged
@@ -3080,22 +3081,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &849060112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 849060109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c95207e2a0d0c524e85d057e6c8e381f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startButton: {fileID: 1459877582}
-  shopButton: {fileID: 1114234216}
-  accountSettingsButton: {fileID: 1038835641}
-  AccountMenu: {fileID: 1129900579}
 --- !u!1 &865398673
 GameObject:
   m_ObjectHideFlags: 0
@@ -3299,6 +3284,42 @@ PrefabInstance:
     - target: {fileID: 7200410164927025817, guid: 28733044dfdd87b4395fc382cd5da1ad, type: 3}
       propertyPath: m_text
       value: Account Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393555323866929771, guid: 28733044dfdd87b4395fc382cd5da1ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393555323866929771, guid: 28733044dfdd87b4395fc382cd5da1ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393555323866929771, guid: 28733044dfdd87b4395fc382cd5da1ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393555323866929771, guid: 28733044dfdd87b4395fc382cd5da1ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393555323866929771, guid: 28733044dfdd87b4395fc382cd5da1ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393555323866929771, guid: 28733044dfdd87b4395fc382cd5da1ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393555323866929771, guid: 28733044dfdd87b4395fc382cd5da1ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393555323866929771, guid: 28733044dfdd87b4395fc382cd5da1ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393555323866929771, guid: 28733044dfdd87b4395fc382cd5da1ad, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8868418088357341826, guid: 28733044dfdd87b4395fc382cd5da1ad, type: 3}
       propertyPath: m_Pivot.x
@@ -4807,6 +4828,7 @@ MonoBehaviour:
   shopButton: {fileID: 1114234216}
   accountSettingsButton: {fileID: 1038835641}
   AccountMenu: {fileID: 1129900579}
+  GamePlayButtons: {fileID: 849060109}
 --- !u!1 &1608649974
 GameObject:
   m_ObjectHideFlags: 0

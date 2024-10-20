@@ -18,9 +18,5 @@ public class CategoriesButton : MonoBehaviour
         });
     }
 
-    public void SetProducts()
-    {
-
-    }
 
 }

@@ -8,12 +8,12 @@ public class MainMenuButtons : MonoBehaviour
 {
     public Button startButton, shopButton, accountSettingsButton;
 
-    public GameObject AccountMenu;
+    public GameObject AccountMenu, GamePlayButtons;
 
     public void Start()
     {
         startButton.onClick.AddListener(() => { SceneManager.LoadScene(1); });
-        accountSettingsButton.onClick.AddListener(() => { AccountMenu.SetActive(true); gameObject.SetActive(false); });
+        accountSettingsButton.onClick.AddListener(() => { GamePlayButtons.SetActive(false); AccountMenu.SetActive(true); });
         shopButton.onClick.AddListener(() =>
         {
             SceneManager.LoadScene(2);

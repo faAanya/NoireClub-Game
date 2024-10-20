@@ -1,10 +1,7 @@
 using System.Collections;
-using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 
-
-
-public class ProductSpawner : MonoBehaviour
+public class SpawnPlayerProduct : MonoBehaviour
 {
     public Transform spawner;
 
@@ -15,6 +12,11 @@ public class ProductSpawner : MonoBehaviour
 
     public PlayerDataSO playerDataSO;
 
+    void Start()
+    {
+        StartCoroutine(WebConnectController.Instance.webConnect.GetPlayerProduct(WebConnectController.Instance.userInfo.playerDataSO.player_id));
+
+    }
 
     public IEnumerator GetShopProducts(string jsonCategoryArray)
     {

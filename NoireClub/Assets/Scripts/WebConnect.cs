@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -9,18 +10,12 @@ public class WebConnect : MonoBehaviour
     public static WebConnect Instance;
     void Start()
     {
-        // A correct website page.
-        // StartCoroutine(GetRequest("http://localhost/NoireClub/GetDate.php"));
-        // StartCoroutine(GetRequest("http://localhost/NoireClub/GetPlayer.php"));
-        // StartCoroutine(LoginPlayer("Test", "12345"));
-        // StartCoroutine(RegisterPlayer("Meow", "12345"));
-        // // A non-existing page.
+
     }
 
 
     void Awake()
     {
-        //todo: Optimize usage of this lines
         DontDestroyOnLoad(this);
 
         if (Instance == null)
@@ -161,12 +156,65 @@ public class WebConnect : MonoBehaviour
         }
         else
         {
-            Debug.Log(www.downloadHandler.text);
 
-            StartCoroutine(WebConnectController.Instance.productSpawner.CreateCategoryRoutine(www.downloadHandler.text));
+            StartCoroutine(WebConnectController.Instance.productSpawner.GetShopProducts(www.downloadHandler.text));
         }
     }
 
+    public IEnumerator GetPlayerProduct(int playerId)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("playerId", playerId);
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/GetPlayerProducts.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+
+            if (!www.downloadHandler.text.Contains("0 results"))
+            {
+                StartCoroutine(WebConnectController.Instance.productProductSpawner.GetShopProducts(www.downloadHandler.text));
+            }
+
+        }
+    }
+
+    #endregion
+
+    #region Economy
+    public IEnumerator ChangeMoney(int playerId, int money)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("playerId", playerId);
+        form.AddField("moneyToChange", money);
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/ChangeMoney.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+
+
+
+        }
+    }
+    #endregion
 }
 
-#endregion
+
+
+
+
+
+
+
