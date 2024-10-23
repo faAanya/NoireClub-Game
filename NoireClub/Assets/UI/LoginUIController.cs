@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ public class LoginUIController : MonoBehaviour
         loginUI = this.gameObject;
         LoginButton.onClick.AddListener(() =>
         {
+
             StartCoroutine(WebConnectController.Instance.webConnect.LoginPlayer(UsernameInput.text, PasswordInput.text));
             StartCoroutine(WebConnectController.Instance.webConnect.GetPlayerInfo(UsernameInput.text));
 

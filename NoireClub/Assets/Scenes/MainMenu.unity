@@ -2879,6 +2879,7 @@ MonoBehaviour:
   userInfo: {fileID: 1826550926}
   categoriesInfo: {fileID: 0}
   productSpawner: {fileID: 0}
+  productProductSpawner: {fileID: 0}
 --- !u!1 &831156035
 GameObject:
   m_ObjectHideFlags: 0
@@ -4904,6 +4905,7 @@ GameObject:
   - component: {fileID: 1826550925}
   - component: {fileID: 1826550924}
   - component: {fileID: 1826550926}
+  - component: {fileID: 1826550927}
   m_Layer: 0
   m_Name: PHPConnectManager
   m_TagString: WebConnect
@@ -4923,6 +4925,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2df04472ea78184dabbe5e0a1297e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dealInfo:
+    items:
+      items: []
+    products:
+      items: []
 --- !u!4 &1826550925
 Transform:
   m_ObjectHideFlags: 0
@@ -4950,8 +4957,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09a9dd76ca0dd304bb94c9ce989115f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Test
-  playerDataSO: {fileID: 11400000, guid: 039ce5e27be307947abbf3106bd76e14, type: 2}
+  user:
+    player_id: 
+    player_name: 
+    score: 0
+    money: 0
+--- !u!114 &1826550927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826550923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b551e0edd1382ec4d99ef149d9fa107f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userInfo: {fileID: 0}
 --- !u!1001 &1837271487
 PrefabInstance:
   m_ObjectHideFlags: 0

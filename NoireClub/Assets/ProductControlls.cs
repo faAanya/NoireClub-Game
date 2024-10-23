@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
@@ -12,9 +15,22 @@ public class ProductController : MonoBehaviour
     public TMP_Text cost;
 
     public Product product;
+
+    public string isBought = "";
     public void Awake()
     {
         product = new Product();
+        SetProductUI();
+        gameObject.GetComponent<Button>().onClick.AddListener(() =>
+      {
+          StartCoroutine(WebConnectController.Instance.webConnect.BuyProduct(
+              Convert.ToInt32(WebConnectController.Instance.userInfo.user.player_id),
+              product.id,
+              WebConnectController.Instance.userInfo.user.player_name,
+              -product.cost)
+              );
+      });
+
     }
     public void SetProductUI()
     {
@@ -26,18 +42,34 @@ public class ProductController : MonoBehaviour
         }
         cost.text = product.cost.ToString();
 
-        gameObject.GetComponent<Button>().onClick.AddListener(() => { Buy(); });
+
     }
+
 
     public void Buy()
     {
-        StartCoroutine(WebConnectController.Instance.webConnect.ChangeMoney(product.id, product.cost));
-    }
 
+    }
     public void Affect()
     {
 
     }
+}
+
+[System.Serializable]
+public class DealInfo
+{
+    public User items;
+    public WProduct products;
+
+    public DealInfo()
+    {
+        items = new User();
+
+        products = new WProduct();
+
+    }
+
 }
 
 [System.Serializable]

@@ -1,18 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon.StructWrapping;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class WebConnect : MonoBehaviour
 {
-    public static WebConnect Instance;
+    public DealInfo dealInfo;
     void Start()
     {
+        dealInfo = new DealInfo();
+
 
     }
 
+    public static WebConnect Instance;
 
     void Awake()
     {
@@ -74,7 +78,11 @@ public class WebConnect : MonoBehaviour
             Debug.Log(www.downloadHandler.text);
 
             string jsonArray = www.downloadHandler.text;
+            Debug.Log("Get Player Info corot");
+
             StartCoroutine(WebConnectController.Instance.userInfo.CreatePlayerRoutine(jsonArray));
+
+
         }
     }
     public IEnumerator LoginPlayer(string userName, string userPassword)
@@ -93,7 +101,10 @@ public class WebConnect : MonoBehaviour
         }
         else
         {
-            WebConnectController.Instance.userInfo.SetID(www.downloadHandler.text, userName);
+            Debug.Log(www.downloadHandler.text);
+
+            WebConnectController.Instance.userInfo.SetId(www.downloadHandler.text, userName);
+
         }
 
     }
@@ -157,7 +168,7 @@ public class WebConnect : MonoBehaviour
         else
         {
 
-            StartCoroutine(WebConnectController.Instance.productSpawner.GetShopProducts(www.downloadHandler.text));
+            WebConnectController.Instance.productSpawner.GetShopProducts(www.downloadHandler.text); //spawns shop objects
         }
     }
 
@@ -176,10 +187,9 @@ public class WebConnect : MonoBehaviour
         else
         {
 
-            if (!www.downloadHandler.text.Contains("0 results"))
-            {
-                StartCoroutine(WebConnectController.Instance.productProductSpawner.GetShopProducts(www.downloadHandler.text));
-            }
+            Debug.Log(www.downloadHandler.text);
+            WebConnectController.Instance.playerProductSpawner.GetShopProducts(www.downloadHandler.text); //spawns player objects
+
 
         }
     }
@@ -203,14 +213,46 @@ public class WebConnect : MonoBehaviour
         else
         {
             Debug.Log(www.downloadHandler.text);
+            Debug.Log("Change Money Function");
 
 
+        }
+    }
+
+    public IEnumerator BuyProduct(int playerId, int productId, string loginUserName, int money)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("playerId", playerId);
+        form.AddField("productId", productId);
+        form.AddField("playerName", loginUserName);
+        form.AddField("moneyToChange", money);
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/BuyProductQueries.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+
+            if (!www.downloadHandler.text.Contains("Product is bought") || !www.downloadHandler.text.Contains("No money"))
+            {
+                WebConnectController.Instance.userInfo.dealInfo = new DealInfo();
+                WebConnectController.Instance.userInfo.dealInfo = JsonUtility.FromJson<DealInfo>(www.downloadHandler.text);
+                WebConnectController.Instance.userInfo.user = WebConnectController.Instance.userInfo.dealInfo.items;
+
+                WebConnectController.Instance.playerProductSpawner.RefreshProductList();
+
+            }
+            UserInfo.OnMoneyChange?.Invoke(WebConnectController.Instance.userInfo.user.money);
 
         }
     }
     #endregion
 }
-
 
 
 

@@ -13,13 +13,9 @@ public class ProductSpawner : MonoBehaviour
     public WProduct wProduct;
 
 
-    public PlayerDataSO playerDataSO;
-
-
-    public IEnumerator GetShopProducts(string jsonCategoryArray)
+    public void GetShopProducts(string jsonCategoryArray)
     {
         wProduct = JsonUtility.FromJson<WProduct>(jsonCategoryArray);
-        yield return null;
         SpawnObject();
     }
 
@@ -37,6 +33,7 @@ public class ProductSpawner : MonoBehaviour
             newProduct.GetComponent<ProductController>().product.id_category = wProduct.items[i].id_category;
 
             newProduct.GetComponent<ProductController>().SetProductUI();
+
         }
     }
 

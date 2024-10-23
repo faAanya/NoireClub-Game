@@ -89,7 +89,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 6015242595246247568}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -143,6 +143,7 @@ MonoBehaviour:
     cost: 0
     characteristic: 
     id_category: 0
+  isBought: 
 --- !u!1 &3908903191194517543
 GameObject:
   m_ObjectHideFlags: 0
