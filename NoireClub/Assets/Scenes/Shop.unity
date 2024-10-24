@@ -1496,7 +1496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3846553647337688030, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 99.99948
+      value: 99.99982
       objectReference: {fileID: 0}
     - target: {fileID: 4110333337300569028, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_Pivot.x
@@ -2101,6 +2101,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 394031720233326178, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 452555902336510405, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
       propertyPath: sceneViewId
       value: 1
@@ -2387,7 +2391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3846553647337688030, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 99.99999
+      value: 99.9998
       objectReference: {fileID: 0}
     - target: {fileID: 4110333337300569028, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_Pivot.x

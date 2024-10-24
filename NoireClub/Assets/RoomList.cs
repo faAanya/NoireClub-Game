@@ -5,21 +5,6 @@ using Photon.Realtime;
 using Photon.Pun;
 using TMPro;
 
-public class Server
-{
-    public int id;
-    public string name;
-}
-
-public class WServer
-{
-    public List<Server> servers;
-
-    public WServer()
-    {
-        servers = new List<Server>();
-    }
-}
 public class RoomList : MonoBehaviourPunCallbacks
 {
     public static RoomList Instance;
@@ -28,11 +13,15 @@ public class RoomList : MonoBehaviourPunCallbacks
 
     public RoomManager roomManager;
 
+    [SerializeField]
     public List<RoomInfo> cachedRoomList = new List<RoomInfo>();
 
-    public WServer wServer;
+    public ServerController serverController;
+
     public void ChangeRoomToCreateName(string _roomName)
     {
+        roomManager = roomManagetGameObject.GetComponent<RoomManager>();
+
         roomManager.roomName = _roomName;
 
     }
@@ -41,8 +30,7 @@ public class RoomList : MonoBehaviourPunCallbacks
     private void Awake()
     {
         Instance = this;
-        wServer = new WServer();
-        roomManager = roomManagetGameObject.GetComponent<RoomManager>();
+
     }
     IEnumerator Start()
     {
@@ -94,7 +82,7 @@ public class RoomList : MonoBehaviourPunCallbacks
                 }
             }
         }
-        UpdateUI();
+        // UpdateUI();
 
     }
 

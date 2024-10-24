@@ -9,12 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class WebConnect : MonoBehaviour
 {
-    public DealInfo dealInfo;
-    void Start()
-    {
-        dealInfo = new DealInfo();
-
-    }
 
     public static WebConnect Instance;
 
@@ -30,38 +24,7 @@ public class WebConnect : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (SceneManager.sceneCount == 1)
-        {
 
-            StartCoroutine(GetServers());
-
-        }
-    }
-
-    IEnumerator GetRequest(string uri)
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            string[] pages = uri.Split('/');
-            int page = pages.Length - 1;
-
-            switch (webRequest.result)
-            {
-                case UnityWebRequest.Result.ConnectionError:
-                case UnityWebRequest.Result.DataProcessingError:
-                    Debug.LogError(pages[page] + ": Error: " + webRequest.error);
-                    break;
-                case UnityWebRequest.Result.ProtocolError:
-                    Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
-                    break;
-                case UnityWebRequest.Result.Success:
-                    Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
-                    break;
-            }
-        }
     }
 
     #region Player
@@ -263,7 +226,6 @@ public class WebConnect : MonoBehaviour
     public IEnumerator GetServers()
     {
         WWWForm form = new WWWForm();
-
         using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/GetServer.php", form);
         yield return www.SendWebRequest();
         Debug.Log(www.result);
@@ -274,14 +236,81 @@ public class WebConnect : MonoBehaviour
         else
         {
             Debug.Log(www.downloadHandler.text);
-            RoomList.Instance.wServer = JsonUtility.FromJson<WServer>(www.downloadHandler.text);
+            ServerController.Instance.wServer = JsonUtility.FromJson<WServer>(www.downloadHandler.text);
+            ServerController.Instance.SpawnButtons();
 
         }
     }
 
+    public IEnumerator AddServer(string name)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("serverName", name);
 
-    #endregion
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/AddServer.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+
+            ServerController.Instance.DeleteButtons();
+            ServerController.Instance.Awake();
+
+        }
+    }
+
+    public IEnumerator GetPlayerServers(int playerId)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("playerId", playerId);
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/GetPlayerServer.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+
+            Debug.Log(www.downloadHandler.text);
+            FavoriteServersController.Instance.wServer = new WServer();
+            FavoriteServersController.Instance.wServer = JsonUtility.FromJson<WServer>(www.downloadHandler.text);
+        }
+    }
+
+    public IEnumerator AddServerToFavorite(int playerId, string serverName)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("playerId", playerId);
+        form.AddField("serverName", serverName);
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/AddServerToPlayers.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+
+            Debug.Log(www.downloadHandler.text);
+            FavoriteServersController.Instance.wServer = JsonUtility.FromJson<WServer>(www.downloadHandler.text);
+        }
+    }
 }
+
+
+
+#endregion
+
 
 
 
