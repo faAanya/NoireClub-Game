@@ -10,23 +10,32 @@ public class WebConnectController : MonoBehaviour
     public WebConnect webConnect;
     public UserInfo userInfo;
 
-    public Categories categoriesInfo;
+    public Categories categoriesInfo = null;
 
-    public ProductSpawner productSpawner;
-    public SpawnPlayerProduct playerProductSpawner;
+    public ProductSpawner productSpawner = null;
+    public SpawnPlayerProduct playerProductSpawner = null;
 
     // Start is called before the first frame update
     void Awake()
     {
-        Instance = this;
-        webConnect = GameObject.FindGameObjectWithTag("WebConnect").GetComponent<WebConnect>();
-        userInfo = GameObject.FindGameObjectWithTag("WebConnect").GetComponent<UserInfo>();
+        try
+        {
+            Instance = this;
+            webConnect = GameObject.FindGameObjectWithTag("WebConnect").GetComponent<WebConnect>();
+            userInfo = GameObject.FindGameObjectWithTag("WebConnect").GetComponent<UserInfo>();
 
 
-        categoriesInfo = GameObject.FindGameObjectWithTag("Category").GetComponent<Categories>();
+            categoriesInfo = GameObject.FindGameObjectWithTag("Category").GetComponent<Categories>();
 
-        productSpawner = GameObject.FindGameObjectWithTag("ProductSpawner").GetComponent<ProductSpawner>();
-        playerProductSpawner = GameObject.FindGameObjectWithTag("PlayerProductSpawner").GetComponent<SpawnPlayerProduct>();
+            productSpawner = GameObject.FindGameObjectWithTag("ProductSpawner").GetComponent<ProductSpawner>();
+            playerProductSpawner = GameObject.FindGameObjectWithTag("PlayerProductSpawner").GetComponent<SpawnPlayerProduct>();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+
+
     }
 
 

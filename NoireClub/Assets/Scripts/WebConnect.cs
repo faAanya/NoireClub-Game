@@ -5,6 +5,7 @@ using ExitGames.Client.Photon.StructWrapping;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class WebConnect : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class WebConnect : MonoBehaviour
     void Start()
     {
         dealInfo = new DealInfo();
-
 
     }
 
@@ -30,7 +30,12 @@ public class WebConnect : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (SceneManager.sceneCount == 1)
+        {
 
+            StartCoroutine(GetServers());
+
+        }
     }
 
     IEnumerator GetRequest(string uri)
@@ -188,7 +193,7 @@ public class WebConnect : MonoBehaviour
         {
 
             Debug.Log(www.downloadHandler.text);
-            WebConnectController.Instance.playerProductSpawner.GetShopProducts(www.downloadHandler.text); //spawns player objects
+            WebConnectController.Instance.playerProductSpawner.SpawnPlayerProducts(www.downloadHandler.text); //spawns player objects
 
 
         }
@@ -244,13 +249,37 @@ public class WebConnect : MonoBehaviour
                 WebConnectController.Instance.userInfo.dealInfo = JsonUtility.FromJson<DealInfo>(www.downloadHandler.text);
                 WebConnectController.Instance.userInfo.user = WebConnectController.Instance.userInfo.dealInfo.items;
 
-                WebConnectController.Instance.playerProductSpawner.RefreshProductList();
+                WebConnectController.Instance.playerProductSpawner.RefreshProductList(WebConnectController.Instance.userInfo.dealInfo.products.items);
 
             }
             UserInfo.OnMoneyChange?.Invoke(WebConnectController.Instance.userInfo.user.money);
 
         }
     }
+    #endregion
+
+    #region Server 
+
+    public IEnumerator GetServers()
+    {
+        WWWForm form = new WWWForm();
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/GetServer.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+            RoomList.Instance.wServer = JsonUtility.FromJson<WServer>(www.downloadHandler.text);
+
+        }
+    }
+
+
     #endregion
 }
 

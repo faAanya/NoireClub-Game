@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using ExitGames.Client.Photon.StructWrapping;
 using UnityEngine;
 
@@ -14,36 +15,38 @@ public class SpawnPlayerProduct : MonoBehaviour
     void Start()
     {
         StartCoroutine(WebConnectController.Instance.webConnect.GetPlayerProduct(Convert.ToInt32(WebConnectController.Instance.userInfo.user.player_id)));
+
+
     }
 
-    public void GetShopProducts(string jsonCategoryArray)
+    public void SpawnPlayerProducts(string jsonCategoryArray)
     {
         wProduct = JsonUtility.FromJson<WProduct>(jsonCategoryArray);
-        SpawnObject();
+        SpawnObject(wProduct.items);
     }
 
-    public void SpawnObject()
+    public void SpawnObject(List<Product> products)
     {
 
-        for (int i = 0; i < WebConnectController.Instance.userInfo.dealInfo.products.items.Count; i++)
+        for (int i = 0; i < products.Count; i++)
         {
             GameObject newProduct = Instantiate(productController, spawner);
             newProduct.transform.SetParent(spawner.transform);
-            newProduct.GetComponent<ProductController>().product.id = WebConnectController.Instance.userInfo.dealInfo.products.items[i].id;
-            newProduct.GetComponent<ProductController>().product.name = WebConnectController.Instance.userInfo.dealInfo.products.items[i].name;
-            newProduct.GetComponent<ProductController>().product.characteristic = WebConnectController.Instance.userInfo.dealInfo.products.items[i].characteristic;
-            newProduct.GetComponent<ProductController>().product.cost = WebConnectController.Instance.userInfo.dealInfo.products.items[i].cost;
-            newProduct.GetComponent<ProductController>().product.id_category = WebConnectController.Instance.userInfo.dealInfo.products.items[i].id_category;
+            newProduct.GetComponent<ProductController>().product.id = products[i].id;
+            newProduct.GetComponent<ProductController>().product.name = products[i].name;
+            newProduct.GetComponent<ProductController>().product.characteristic = products[i].characteristic;
+            newProduct.GetComponent<ProductController>().product.cost = products[i].cost;
+            newProduct.GetComponent<ProductController>().product.id_category = products[i].id_category;
 
             newProduct.GetComponent<ProductController>().SetProductUI();
         }
     }
 
-    public void RefreshProductList()
+    public void RefreshProductList(List<Product> products)
     {
         DeleteObjects();
 
-        SpawnObject();
+        SpawnObject(products);
         Debug.Log("Refreshed Objects");
 
     }

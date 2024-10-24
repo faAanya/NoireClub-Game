@@ -50,10 +50,115 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0487a9dbe58fd34fb84ffd301261d1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDataSO: {fileID: 11400000, guid: 039ce5e27be307947abbf3106bd76e14, type: 2}
   userName: {fileID: 8592152833591464615}
   score: {fileID: 6851473679650446277}
   money: {fileID: 6469667455302669206}
+--- !u!1 &394031720233326178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1053059573072382311}
+  - component: {fileID: 1012834742300247345}
+  - component: {fileID: 1279495207848332210}
+  - component: {fileID: 2139131138303939615}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1053059573072382311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394031720233326178}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6731665977528929680}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!20 &1012834742300247345
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394031720233326178}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &1279495207848332210
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394031720233326178}
+  m_Enabled: 1
+--- !u!114 &2139131138303939615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394031720233326178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61756aea0c23bf143ab7e7e33dbb1395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
 --- !u!1 &563770554941010821
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,7 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262086e385fc2284184834c1ee8b88ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pCamera: {fileID: 0}
+  pCamera: {fileID: 1012834742300247345}
   dotsList: []
 --- !u!1 &822632466372877866
 GameObject:
@@ -2042,6 +2147,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1607278109332114888}
+  - {fileID: 1053059573072382311}
   - {fileID: 5517861308132218347}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2058,7 +2164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 6750027905712481711}
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 394031720233326178}
 --- !u!1 &3021994446526913408
 GameObject:
   m_ObjectHideFlags: 0
@@ -3376,6 +3482,8 @@ MonoBehaviour:
   webConnect: {fileID: 0}
   userInfo: {fileID: 0}
   categoriesInfo: {fileID: 0}
+  productSpawner: {fileID: 0}
+  playerProductSpawner: {fileID: 0}
 --- !u!1 &5285466673957835249
 GameObject:
   m_ObjectHideFlags: 0

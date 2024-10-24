@@ -40,6 +40,7 @@ public class UserInfo : MonoBehaviour
     private void Start()
     {
         dealInfo = new DealInfo();
+
     }
     public void SetId(string id, string userName)
     {

@@ -6,11 +6,13 @@ using ExitGames.Client.Photon.StructWrapping;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Categories : MonoBehaviour
 {
     public GameObject[] categoriesButtons;
+    public Button exitShop;
     public int size;
     WCategories wCategories;
     public void Start()
@@ -21,7 +23,7 @@ public class Categories : MonoBehaviour
             categoriesButtons[i] = gameObject.transform.GetChild(i).gameObject;
         }
         StartCoroutine(WebConnectController.Instance.webConnect.GetCategoryName());
-
+        exitShop.onClick.AddListener(() => { SceneManager.LoadScene(0); });
 
     }
 
