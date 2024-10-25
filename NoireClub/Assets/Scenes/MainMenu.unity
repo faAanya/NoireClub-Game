@@ -3572,6 +3572,7 @@ MonoBehaviour:
   roomListPrefab: {fileID: 7085657335487091503, guid: 82809b65d90cefc4bac91119d95a2fd0, type: 3}
   roomManagetGameObject: {fileID: 0}
   roomManager: {fileID: 0}
+  serverController: {fileID: 0}
 --- !u!1 &1029272982
 GameObject:
   m_ObjectHideFlags: 0
@@ -5426,6 +5427,7 @@ MonoBehaviour:
       money: 0
     products:
       items: []
+  activePlayer: {fileID: 0}
 --- !u!114 &1826550927
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,20 +11,23 @@ public class MoveObject : MonoBehaviour
 {
 
     public Queue<Vector3> dots;
-    Vector3 pos;
+    public Vector3 pos, lookAtPos;
     private Vector2 MousePos;
     RaycastHit hit;
     Ray rayOrigin;
 
-    bool pressed;
+    public bool pressed, firePressed;
 
     public Camera pCamera;
 
     public List<Vector3> dotsList;
     private List<Vector3> pastPositions;
+    Quaternion newRotation;
+
+
     void Awake()
     {
-
+        lookAtPos = new Vector3();
         pos = new Vector3();
         pastPositions = new List<Vector3>();
         dots = new Queue<Vector3>();
@@ -34,7 +37,6 @@ public class MoveObject : MonoBehaviour
     void Update()
     {
         MouseTouch();
-
     }
 
     public void MouseTouch()
@@ -42,6 +44,7 @@ public class MoveObject : MonoBehaviour
         rayOrigin = pCamera.ScreenPointToRay(MousePos);
         if (pressed)
         {
+
             Debug.Log("Hit");
             if (Physics.Raycast(rayOrigin, out hit))
             {
@@ -50,15 +53,21 @@ public class MoveObject : MonoBehaviour
                 if (hitObject.tag == "Plane")
                 {
                     pos = hit.point;
+                    lookAtPos = pos - transform.position;
 
-
+                    newRotation = Quaternion.LookRotation(lookAtPos, transform.up);
                 }
             }
         }
 
         transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * 5f);
 
+        transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 8);
 
+        if (firePressed)
+        {
+            Debug.Log("Fire");
+        }
     }
 
 
@@ -79,6 +88,19 @@ public class MoveObject : MonoBehaviour
         if (context.canceled)
         {
             pressed = false;
+        }
+
+    }
+
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            firePressed = true;
+        }
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            firePressed = false;
         }
 
     }
