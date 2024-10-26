@@ -44,8 +44,6 @@ public class MoveObject : MonoBehaviour
         rayOrigin = pCamera.ScreenPointToRay(MousePos);
         if (pressed)
         {
-
-            Debug.Log("Hit");
             if (Physics.Raycast(rayOrigin, out hit))
             {
 

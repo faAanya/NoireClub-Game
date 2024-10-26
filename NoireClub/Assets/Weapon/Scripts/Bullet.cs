@@ -3,34 +3,37 @@ using Photon.Pun;
 using UnityEngine;
 public class BulletController : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D bulletRB;
-    [SerializeField] private Sprite collistionSprite;
+    [SerializeField] private Rigidbody bulletRB;
     public int damage;
     Camera mainCam;
 
     private Vector3 startPosition;
-    private WeaponController weaponSwithcerController;
+    public WeaponClass weaponClass;
+
+    public float livingTime;
     void Awake()
     {
-        weaponSwithcerController = GameObject.FindGameObjectWithTag("WeaponSwitcherController").GetComponent<WeaponController>();
         startPosition = transform.position;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Damage: " + damage);
+
         if (other.gameObject.GetComponent<PlayerHealth>() != null)
         {
-
             other.gameObject.GetComponent<PhotonView>().RPC("ChangeHealth", RpcTarget.All, -damage);
-            Debug.Log("Damage: " + damage);
+            Destroy(gameObject);
+
         }
-        Destroy(gameObject);
     }
     void Update()
     {
-        if (!gameObject.GetComponent<MeshRenderer>().isVisible || Vector2.Distance(startPosition, gameObject.transform.position) >= weaponSwithcerController.weaponClass.weaponMaxDistance)
+        livingTime -= Time.deltaTime;
+        if (livingTime < 0)
         {
             Destroy(gameObject);
+
         }
     }
 }

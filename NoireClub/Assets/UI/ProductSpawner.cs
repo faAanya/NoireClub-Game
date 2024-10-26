@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
-using ExitGames.Client.Photon.StructWrapping;
+
 using UnityEngine;
+using UnityEngine.UI;
+
 public class ProductSpawner : MonoBehaviour
 {
     public Transform spawner;
@@ -30,6 +33,11 @@ public class ProductSpawner : MonoBehaviour
             newProduct.GetComponent<ProductController>().product.cost = wProduct.items[i].cost;
             newProduct.GetComponent<ProductController>().product.id_category = wProduct.items[i].id_category;
 
+            newProduct.GetComponent<Button>().onClick.AddListener(() =>
+      {
+          Affect(newProduct.GetComponent<ProductController>().product);
+
+      });
             newProduct.GetComponent<ProductController>().SetProductUI();
 
         }
@@ -42,4 +50,16 @@ public class ProductSpawner : MonoBehaviour
         }
     }
 
+    public void Affect(Product product)
+    {
+
+        StartCoroutine(WebConnectController.Instance.webConnect.BuyProduct(
+            Convert.ToInt32(WebConnectController.Instance.userInfo.user.player_id),
+          product.id,
+            WebConnectController.Instance.userInfo.user.player_name,
+            -product.cost)
+            );
+
+        Debug.Log("Affect");
+    }
 }

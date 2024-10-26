@@ -12,7 +12,7 @@ public class FileDataHandler : MonoBehaviour
     private void Start()
     {
         userInfo = GetComponent<UserInfo>();
-        // Load();
+        Load();
 
     }
 

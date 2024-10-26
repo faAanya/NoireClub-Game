@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,6 @@ public class CategoriesButton : MonoBehaviour
 {
     public Button button;
     public CategorySO categorySO;
-
     public void Start()
     {
         button = GetComponent<Button>();

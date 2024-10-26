@@ -663,6 +663,8 @@ MonoBehaviour:
   weaponMaxDistance: 10
   player: {fileID: 0}
   placeFromSpawn: {fileID: 2041191590179992959}
+  fireRate: 0
+  livingTime: 0.5
 --- !u!1 &4229797755914400660
 GameObject:
   m_ObjectHideFlags: 0

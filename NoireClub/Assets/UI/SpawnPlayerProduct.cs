@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using ExitGames.Client.Photon.StructWrapping;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnPlayerProduct : MonoBehaviour
 {
@@ -11,12 +13,21 @@ public class SpawnPlayerProduct : MonoBehaviour
     public GameObject productController;
 
     public WProduct wProduct;
+    List<Action<GameObject>> categoryAffects;
+    public GameObject activePlayer;
 
+    private void InstanciateAffects()
+    {
+        categoryAffects = new List<Action<GameObject>>();
+        categoryAffects.Add(ChangeColor);
+        categoryAffects.Add(SpawnHat);
+    }
     void Start()
     {
+        InstanciateAffects();
         StartCoroutine(WebConnectController.Instance.webConnect.GetPlayerProduct(Convert.ToInt32(WebConnectController.Instance.userInfo.user.player_id)));
 
-
+        activePlayer = FindAnyObjectByType<PlayerSetup>().gameObject;
     }
 
     public void SpawnPlayerProducts(string jsonCategoryArray)
@@ -37,7 +48,11 @@ public class SpawnPlayerProduct : MonoBehaviour
             newProduct.GetComponent<ProductController>().product.characteristic = products[i].characteristic;
             newProduct.GetComponent<ProductController>().product.cost = products[i].cost;
             newProduct.GetComponent<ProductController>().product.id_category = products[i].id_category;
+            newProduct.GetComponent<Button>().onClick.AddListener(() =>
+                  {
 
+                      categoryAffects[newProduct.GetComponent<ProductController>().product.id_category - 1]?.Invoke(newProduct);
+                  });
             newProduct.GetComponent<ProductController>().SetProductUI();
         }
     }
@@ -58,5 +73,20 @@ public class SpawnPlayerProduct : MonoBehaviour
             Destroy(spawner.transform.GetChild(i).gameObject);
         }
     }
+    public void ChangeColor(GameObject product)
+    {
+        Color newCol;
 
+        if (ColorUtility.TryParseHtmlString(product.GetComponent<ProductController>().product.characteristic, out newCol))
+        {
+            activePlayer.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.color = newCol;
+        }
+
+        Debug.Log("Change color");
+    }
+
+    public void SpawnHat(GameObject product)
+    {
+        Debug.Log("SpawnHat");
+    }
 }

@@ -37,9 +37,8 @@ public class UserInfo : MonoBehaviour
     public User user;
     public DealInfo dealInfo;
 
-    public GameObject activePlayer;
 
-    private void Start()
+    private void Awake()
     {
         dealInfo = new DealInfo();
 

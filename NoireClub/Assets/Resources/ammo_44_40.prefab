@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -8084453164885230823}
   - component: {fileID: -3618057128058883772}
   - component: {fileID: 7601973017471725522}
+  - component: {fileID: 3614415352582428288}
   m_Layer: 0
   m_Name: ammo_44_40
   m_TagString: Untagged
@@ -196,3 +197,18 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &3614415352582428288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556352359394094858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 238b5543575a1d74496363da91acec53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletRB: {fileID: 0}
+  damage: 10
+  weaponClass: {fileID: 0}

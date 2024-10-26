@@ -7,8 +7,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "ProductSO", menuName = "ProductSO", order = 0)]
-
 public class ProductController : MonoBehaviour
 {
     public Image innerImage;
@@ -17,19 +15,11 @@ public class ProductController : MonoBehaviour
     public Product product;
 
     public string isBought = "";
+
     public void Awake()
     {
         product = new Product();
         SetProductUI();
-        gameObject.GetComponent<Button>().onClick.AddListener(() =>
-      {
-          StartCoroutine(WebConnectController.Instance.webConnect.BuyProduct(
-              Convert.ToInt32(WebConnectController.Instance.userInfo.user.player_id),
-              product.id,
-              WebConnectController.Instance.userInfo.user.player_name,
-              -product.cost)
-              );
-      });
 
     }
     public void SetProductUI()
@@ -45,15 +35,6 @@ public class ProductController : MonoBehaviour
 
     }
 
-
-    public void Buy()
-    {
-
-    }
-    public void Affect()
-    {
-
-    }
 }
 
 [System.Serializable]

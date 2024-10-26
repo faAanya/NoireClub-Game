@@ -1496,7 +1496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3846553647337688030, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 99.99983
+      value: 99.99995
       objectReference: {fileID: 0}
     - target: {fileID: 4110333337300569028, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_Pivot.x
@@ -2391,7 +2391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3846553647337688030, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 99.99981
+      value: 99.99992
       objectReference: {fileID: 0}
     - target: {fileID: 4110333337300569028, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_Pivot.x
@@ -2472,6 +2472,10 @@ PrefabInstance:
     - target: {fileID: 4110333337300569028, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5565263492141219681, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
+      propertyPath: m_ConstraintCount
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7025224684438057385, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_Name

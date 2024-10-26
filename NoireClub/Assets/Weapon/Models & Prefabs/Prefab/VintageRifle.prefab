@@ -529,10 +529,12 @@ MonoBehaviour:
   isActiveWeapon: 1
   bullet: {fileID: 1556352359394094858, guid: 9176171bc88fe4208ac5246313b0af81, type: 3}
   amountOfBullets: 5
-  bulletSpeed: 3
+  bulletSpeed: 10
   weaponMaxDistance: 3
   player: {fileID: 0}
-  placeFromSpawn: {fileID: 0}
+  placeFromSpawn: {fileID: 5483035339972332114}
+  fireRate: 0
+  livingTime: 0.2
 --- !u!1 &7916988861139322342
 GameObject:
   m_ObjectHideFlags: 0
