@@ -212,3 +212,4 @@ MonoBehaviour:
   bulletRB: {fileID: 0}
   damage: 10
   weaponClass: {fileID: 0}
+  livingTime: 2

@@ -13,7 +13,7 @@ public class FileDataHandler : MonoBehaviour
     {
         userInfo = GetComponent<UserInfo>();
         Load();
-
+        StartCoroutine(WebConnectController.Instance.webConnect.AddFriend(userInfo.user.player_name, userInfo.user.player_name));
     }
 
 

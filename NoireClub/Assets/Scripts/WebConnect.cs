@@ -278,8 +278,6 @@ public class WebConnect : MonoBehaviour
         }
         else
         {
-
-            Debug.Log(www.downloadHandler.text);
             FavoriteServersController.Instance.wServer = new WServer();
             FavoriteServersController.Instance.wServer = JsonUtility.FromJson<WServer>(www.downloadHandler.text);
         }
@@ -305,11 +303,35 @@ public class WebConnect : MonoBehaviour
             FavoriteServersController.Instance.wServer = JsonUtility.FromJson<WServer>(www.downloadHandler.text);
         }
     }
+    #endregion
+
+    #region Friends
+
+    public IEnumerator AddFriend(string friendName, string playerName)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("friendName", friendName);
+        form.AddField("playerName", playerName);
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/AddFriend.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+            WebConnectController.Instance.userInfo.friends = JsonUtility.FromJson<Friends>(www.downloadHandler.text);
+        }
+    }
+    #endregion
 }
 
 
 
-#endregion
+
 
 
 

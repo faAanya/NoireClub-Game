@@ -14,14 +14,8 @@ public class RoomItemButton : MonoBehaviour
     {
         GetComponent<Button>().onClick.AddListener(() =>
         {
-
             RoomList.Instance.JoinRoomByName(RoomName);
-
         });
     }
 
-    public void OnButtonPressed()
-    {
-
-    }
 }

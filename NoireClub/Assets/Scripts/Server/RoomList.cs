@@ -4,12 +4,14 @@ using UnityEngine;
 using Photon.Realtime;
 using Photon.Pun;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RoomList : MonoBehaviourPunCallbacks
 {
     public static RoomList Instance;
     public Transform roomListParent;
-    public GameObject roomListPrefab, roomManagetGameObject;
+    public GameObject roomListPrefab, roomManagetGameObject, playerList;
 
     public RoomManager roomManager;
 
@@ -17,6 +19,8 @@ public class RoomList : MonoBehaviourPunCallbacks
     public List<RoomInfo> cachedRoomList = new List<RoomInfo>();
 
     public ServerController serverController;
+
+    public Button ExitButton;
 
     public void ChangeRoomToCreateName(string _roomName)
     {
@@ -30,6 +34,7 @@ public class RoomList : MonoBehaviourPunCallbacks
     private void Awake()
     {
         Instance = this;
+        ExitButton.onClick.AddListener(() => { SceneManager.LoadScene(0); });
 
     }
     IEnumerator Start()
@@ -108,7 +113,7 @@ public class RoomList : MonoBehaviourPunCallbacks
     {
         roomManager.roomName = _name;
         roomManager.gameObject.SetActive(true);
-
+        playerList.SetActive(true);
         gameObject.SetActive(false);
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using ExitGames.Client.Photon.StructWrapping;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,6 +39,7 @@ public class WebConnectController : MonoBehaviour
 
 
     }
+
 
 
 }

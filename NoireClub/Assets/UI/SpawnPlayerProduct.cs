@@ -1,8 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using ExitGames.Client.Photon.StructWrapping;
+using System.IO;
 using UnityEditor;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +16,7 @@ public class SpawnPlayerProduct : MonoBehaviour
     List<Action<GameObject>> categoryAffects;
     public GameObject activePlayer;
 
+    public ShopDealInfo shopDealInfo;
     private void InstanciateAffects()
     {
         categoryAffects = new List<Action<GameObject>>();
@@ -28,6 +29,8 @@ public class SpawnPlayerProduct : MonoBehaviour
         StartCoroutine(WebConnectController.Instance.webConnect.GetPlayerProduct(Convert.ToInt32(WebConnectController.Instance.userInfo.user.player_id)));
 
         activePlayer = FindAnyObjectByType<PlayerSetup>().gameObject;
+
+
     }
 
     public void SpawnPlayerProducts(string jsonCategoryArray)
@@ -79,14 +82,72 @@ public class SpawnPlayerProduct : MonoBehaviour
 
         if (ColorUtility.TryParseHtmlString(product.GetComponent<ProductController>().product.characteristic, out newCol))
         {
-            activePlayer.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.color = newCol;
+            activePlayer.transform.GetChild(0).gameObject.GetComponent<Renderer>().sharedMaterial.color = newCol;
+            // WebConnectController.Instance.userInfo.playerPrefab.transform.GetChild(0).gameObject.GetComponent<Renderer>().sharedMaterial.color = newCol;
+            // PrefabUtility.ApplyPrefabInstance(WebConnectController.Instance.userInfo.playerPrefab, InteractionMode.UserAction);
+
+            shopDealInfo.color = newCol;
+            string json = JsonUtility.ToJson(shopDealInfo);
+            using (FileStream stream = new FileStream(WebConnectController.Instance.userInfo.json, FileMode.Create))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(json);
+                }
+            }
         }
 
         Debug.Log("Change color");
+
+
     }
 
     public void SpawnHat(GameObject product)
     {
-        Debug.Log("SpawnHat");
+        List<GameObject> hats = new List<GameObject>();
+        hats.Add(Resources.Load<GameObject>("black hat"));
+        hats.Add(Resources.Load<GameObject>("brown hat"));
+        if (product.GetComponent<ProductController>().product.characteristic == "#3f2821")
+        {
+            // #if UNITY_EDITOR
+            //             GameObject prefabInstance = (GameObject)PrefabUtility.InstantiatePrefab(WebConnectController.Instance.userInfo.playerPrefab);
+            //             GameObject cloth = Instantiate(hats[0], prefabInstance.transform.GetChild(0).gameObject.transform.GetChild(0).transform);
+            //             PrefabUtility.SaveAsPrefabAsset(prefabInstance, "Assets/Resources/Square.prefab");
+
+            //             DestroyImmediate(prefabInstance);
+
+            // #endif
+            shopDealInfo.hat = hats[0];
+            string json = JsonUtility.ToJson(shopDealInfo);
+            using (FileStream stream = new FileStream(WebConnectController.Instance.userInfo.json, FileMode.Create))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(json);
+                }
+            }
+        }
+        else if (product.GetComponent<ProductController>().product.characteristic == "#A88d6d")
+        {
+            // #if UNITY_EDITOR
+            //             GameObject prefabInstance = (GameObject)PrefabUtility.InstantiatePrefab(WebConnectController.Instance.userInfo.playerPrefab);
+            //             GameObject cloth = Instantiate(hats[1], prefabInstance.transform.GetChild(0).gameObject.transform.GetChild(0).transform);
+            //             PrefabUtility.SaveAsPrefabAsset(prefabInstance, "Assets/Resources/Square.prefab");
+
+            //             DestroyImmediate(prefabInstance);
+            // #endif
+
+            shopDealInfo.hat = hats[1];
+            string json = JsonUtility.ToJson(shopDealInfo);
+
+            using (FileStream stream = new FileStream(WebConnectController.Instance.userInfo.json, FileMode.Create))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    writer.Write(json);
+                }
+            }
+        }
+
     }
 }

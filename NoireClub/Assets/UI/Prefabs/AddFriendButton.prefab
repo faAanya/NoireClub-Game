@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Server Name
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -148,9 +148,9 @@ GameObject:
   - component: {fileID: 8659764567217724927}
   - component: {fileID: 8427904387487530336}
   - component: {fileID: 2652973001374242979}
-  - component: {fileID: 1320395224900123424}
+  - component: {fileID: -1132872436024611150}
   m_Layer: 0
-  m_Name: ServerButton
+  m_Name: AddFriendButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1320395224900123424
+--- !u!114 &-1132872436024611150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,10 +268,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7085657335487091503}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8403c1bee7f92624da2678696faa45f4, type: 3}
+  m_Script: {fileID: 11500000, guid: cae992c3721b2774185cbadce5b576c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomName: 
+  playerListController: {fileID: 0}
+  friendName: 
 --- !u!1 &7642560015446035832
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +285,6 @@ GameObject:
   - component: {fileID: 6445603631605111809}
   - component: {fileID: 5103494639287428118}
   - component: {fileID: 9076336566963913199}
-  - component: {fileID: 8325929778824827228}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -393,18 +393,3 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8325929778824827228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7642560015446035832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 764dd2c43ead85c47adcac06b246fb90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  addServer: {fileID: 9076336566963913199}
-  parent: {fileID: 7085657335487091503}
-  fServerName: 

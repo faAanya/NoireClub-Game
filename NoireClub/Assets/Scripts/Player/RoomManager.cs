@@ -13,21 +13,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
     void Awake()
     {
         Instance = this;
-    }
-
-    public void JoinRoomButtonPressed()
-    {
-
-        Debug.Log("Connecting");
-        PhotonNetwork.JoinOrCreateRoom(roomName, null, null);
-
-    }
-    void Start()
-    {
         Debug.Log("Connecting");
 
         PhotonNetwork.JoinOrCreateRoom(roomName, null, null);
     }
+
+
 
     // public override void OnConnectedToMaster()
     // {
@@ -52,10 +43,19 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Joined room");
         base.OnJoinedRoom();
+        SpawnPlayer();
 
-        GameObject _player = PhotonNetwork.Instantiate(myPlayer.name, spawnPoint.transform.position, Quaternion.identity);
-        _player.GetComponent<PlayerSetup>().IsLocalPlayer();
+        PhotonNetwork.LocalPlayer.NickName = WebConnectController.Instance.userInfo.user.player_name;
+        Debug.LogError(PhotonNetwork.LocalPlayer.NickName);
     }
 
+    public void SpawnPlayer()
+    {
+        GameObject _player = PhotonNetwork.Instantiate(myPlayer.name, spawnPoint.transform.position, Quaternion.identity);
+        _player.transform.GetChild(0).GetComponent<PlayerHealth>().isLocalPlayer = true;
+        // transform.GetChild(0).gameObject.GetComponent<PhotonView>().RPC("SetPlayerLookFunc", RpcTarget.All);
+
+        _player.GetComponent<PlayerSetup>().IsLocalPlayer();
+    }
 
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Photon.Pun;
 using UnityEngine;
 
 [Serializable]
@@ -13,11 +14,6 @@ public class User
 
     public int score;
     public int money;
-
-    public User()
-    {
-
-    }
 
 }
 
@@ -31,16 +27,38 @@ public class WUser
         items = new List<User>();
     }
 }
+[Serializable]
+public class ShopDealInfo
+{
+    public Color color;
+    public GameObject hat;
+}
+[Serializable]
+public class Friends
+{
+    public List<string> names;
+}
 public class UserInfo : MonoBehaviour
 {
     public static Action<int> OnMoneyChange;
     public User user;
     public DealInfo dealInfo;
 
+    public GameObject playerPrefab;
+
+    public Friends friends;
+
+    public string json = "shop.json";
 
     private void Awake()
     {
         dealInfo = new DealInfo();
+
+    }
+
+    void Start()
+    {
+
 
     }
     public void SetId(string id, string userName)
