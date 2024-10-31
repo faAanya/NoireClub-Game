@@ -9,6 +9,7 @@ TagManager:
   - Category
   - ProductSpawner
   - PlayerProductSpawner
+  - CharacterSpawner
   layers:
   - Default
   - TransparentFX

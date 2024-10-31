@@ -147,7 +147,7 @@ public class WebConnect : MonoBehaviour
 
         using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/GetPlayerProducts.php", form);
         yield return www.SendWebRequest();
-        Debug.Log(www.result);
+
         if (www.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError(www.error);
@@ -326,6 +326,94 @@ public class WebConnect : MonoBehaviour
             WebConnectController.Instance.userInfo.friends = JsonUtility.FromJson<Friends>(www.downloadHandler.text);
         }
     }
+    #endregion
+
+    #region Characters
+    public IEnumerator GetAllCharacters()
+    {
+        WWWForm form = new WWWForm();
+
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/GetAllCharacters.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+
+
+            WebConnectController.Instance.spawnShopCharacters.listOfCharacters = JsonUtility.FromJson<WCharacter>(www.downloadHandler.text);
+            StartCoroutine(GetPlayerCharacters(Convert.ToInt32(WebConnectController.Instance.userInfo.user.player_id)));
+
+
+        }
+    }
+
+    public IEnumerator GetPlayerCharacters(int playerId)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("playerId", playerId);
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/GetPlayerCharacter.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+            if (www.downloadHandler.text.Contains("0 results"))
+            {
+                WebConnectController.Instance.spawnShopCharacters.listOfPlayerCharacters = null;
+            }
+            else
+            {
+                WebConnectController.Instance.spawnShopCharacters.listOfPlayerCharacters = JsonUtility.FromJson<WCharacter>(www.downloadHandler.text);
+            }
+
+            WebConnectController.Instance.spawnShopCharacters.SetButtons();
+
+        }
+    }
+
+    public IEnumerator BuyPlayerCharacter(int playerId, int characterId)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("playerId", playerId);
+        form.AddField("characterId", characterId);
+
+        using UnityWebRequest www = UnityWebRequest.Post("http://localhost/NoireClub/BuyPlayerCharacter.php", form);
+        yield return www.SendWebRequest();
+        Debug.Log(www.result);
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(www.error);
+        }
+        else
+        {
+            Debug.Log(www.downloadHandler.text);
+            if (www.downloadHandler.text.Contains("0 results"))
+            {
+                WebConnectController.Instance.spawnShopCharacters.listOfPlayerCharacters = new WCharacter();
+            }
+            else
+            {
+                WebConnectController.Instance.spawnShopCharacters.listOfPlayerCharacters = new WCharacter();
+                WebConnectController.Instance.spawnShopCharacters.listOfPlayerCharacters = JsonUtility.FromJson<WCharacter>(www.downloadHandler.text);
+            }
+
+            // WebConnectController.Instance.spawnShopCharacters.SetButtons();
+
+            // StartCoroutine(GetPlayerCharacters(Convert.ToInt32(WebConnectController.Instance.userInfo.user.player_id)));
+        }
+    }
+
     #endregion
 }
 

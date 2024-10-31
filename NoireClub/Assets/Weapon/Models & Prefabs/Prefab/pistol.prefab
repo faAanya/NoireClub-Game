@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 2888721650253217670}
   - component: {fileID: 8277582724287750747}
   m_Layer: 0
-  m_Name: FA Superhawk
+  m_Name: pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

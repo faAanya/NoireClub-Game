@@ -107,45 +107,38 @@ public class SpawnPlayerProduct : MonoBehaviour
         List<GameObject> hats = new List<GameObject>();
         hats.Add(Resources.Load<GameObject>("black hat"));
         hats.Add(Resources.Load<GameObject>("brown hat"));
+
         if (product.GetComponent<ProductController>().product.characteristic == "#3f2821")
         {
-            // #if UNITY_EDITOR
-            //             GameObject prefabInstance = (GameObject)PrefabUtility.InstantiatePrefab(WebConnectController.Instance.userInfo.playerPrefab);
-            //             GameObject cloth = Instantiate(hats[0], prefabInstance.transform.GetChild(0).gameObject.transform.GetChild(0).transform);
-            //             PrefabUtility.SaveAsPrefabAsset(prefabInstance, "Assets/Resources/Square.prefab");
-
-            //             DestroyImmediate(prefabInstance);
-
-            // #endif
-            shopDealInfo.hat = hats[0];
-            string json = JsonUtility.ToJson(shopDealInfo);
-            using (FileStream stream = new FileStream(WebConnectController.Instance.userInfo.json, FileMode.Create))
+            if (activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.childCount == 0)
             {
-                using (StreamWriter writer = new StreamWriter(stream))
-                {
-                    writer.Write(json);
-                }
+                GameObject cloth = Instantiate(hats[0], activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform);
             }
+            else
+            {
+                for (int i = 0; i < activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.childCount; i++)
+                {
+                    Destroy(activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(i).gameObject);
+                }
+                GameObject cloth = Instantiate(hats[0], activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform);
+
+            }
+
         }
         else if (product.GetComponent<ProductController>().product.characteristic == "#A88d6d")
         {
-            // #if UNITY_EDITOR
-            //             GameObject prefabInstance = (GameObject)PrefabUtility.InstantiatePrefab(WebConnectController.Instance.userInfo.playerPrefab);
-            //             GameObject cloth = Instantiate(hats[1], prefabInstance.transform.GetChild(0).gameObject.transform.GetChild(0).transform);
-            //             PrefabUtility.SaveAsPrefabAsset(prefabInstance, "Assets/Resources/Square.prefab");
-
-            //             DestroyImmediate(prefabInstance);
-            // #endif
-
-            shopDealInfo.hat = hats[1];
-            string json = JsonUtility.ToJson(shopDealInfo);
-
-            using (FileStream stream = new FileStream(WebConnectController.Instance.userInfo.json, FileMode.Create))
+            if (activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.childCount == 0)
             {
-                using (StreamWriter writer = new StreamWriter(stream))
+                GameObject cloth = Instantiate(hats[1], activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform);
+            }
+            else
+            {
+                for (int i = 0; i < activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.childCount; i++)
                 {
-                    writer.Write(json);
+                    Destroy(activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(i).gameObject);
                 }
+                GameObject cloth = Instantiate(hats[1], activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform);
+
             }
         }
 

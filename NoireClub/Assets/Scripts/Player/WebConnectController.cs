@@ -17,6 +17,8 @@ public class WebConnectController : MonoBehaviour
     public ProductSpawner productSpawner = null;
     public SpawnPlayerProduct playerProductSpawner = null;
 
+    public SpawnShopCharacters spawnShopCharacters = null;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -31,6 +33,8 @@ public class WebConnectController : MonoBehaviour
 
             productSpawner = GameObject.FindGameObjectWithTag("ProductSpawner").GetComponent<ProductSpawner>();
             playerProductSpawner = GameObject.FindGameObjectWithTag("PlayerProductSpawner").GetComponent<SpawnPlayerProduct>();
+
+            spawnShopCharacters = GameObject.FindGameObjectWithTag("CharacterSpawner").GetComponent<SpawnShopCharacters>();
         }
         catch (System.Exception e)
         {

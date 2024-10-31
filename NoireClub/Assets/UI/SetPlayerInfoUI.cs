@@ -12,8 +12,8 @@ public class SetPlayerInfoUI : MonoBehaviour
     private void Start()
     {
         userName.text += WebConnectController.Instance.userInfo.user.player_name;
-        score.text = WebConnectController.Instance.userInfo.user.score.ToString();
-        money.text = WebConnectController.Instance.userInfo.user.money.ToString();
+        score.text = "Score: " + WebConnectController.Instance.userInfo.user.score.ToString();
+        money.text = "Money: " + WebConnectController.Instance.userInfo.user.money.ToString();
     }
     private void OnEnable()
     {
@@ -30,7 +30,7 @@ public class SetPlayerInfoUI : MonoBehaviour
     // Метод для обновления UI при изменении здоровья
     private void UpdateHealthDisplay(int money)
     {
-        this.money.text = money.ToString();
+        this.money.text = "Money: " + money.ToString();
         Debug.Log("Updated");
 
     }

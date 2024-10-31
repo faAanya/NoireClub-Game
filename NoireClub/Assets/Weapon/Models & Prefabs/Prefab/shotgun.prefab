@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 7682213458616953240}
   - component: {fileID: 7057678265380075878}
   m_Layer: 0
-  m_Name: VintageRifle
+  m_Name: shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
