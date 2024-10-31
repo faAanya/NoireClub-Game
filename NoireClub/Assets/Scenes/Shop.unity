@@ -735,6 +735,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterButtons: {fileID: 1238221892139749856, guid: 0e7836cdc9f3a5c4aa25dfa94ff86890, type: 3}
+  listOfCharacters:
+    characters: []
+  listOfPlayerCharacters:
+    characters: []
+  placeTospawn: {fileID: 1926880941}
 --- !u!1 &1181976801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3846553647337688030, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 100
+      value: 99.99919
       objectReference: {fileID: 0}
     - target: {fileID: 4110333337300569028, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_Pivot.x
@@ -1599,10 +1604,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 394031720233326178, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 452555902336510405, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
       propertyPath: sceneViewId
       value: 1
@@ -1623,21 +1624,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2490562555628066984, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3006787244670582905, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3255553187179548165, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3255553187179548165, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -453.7
+      value: -564
       objectReference: {fileID: 0}
     - target: {fileID: 3255553187179548165, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 303.88
+      value: 373
       objectReference: {fileID: 0}
     - target: {fileID: 3401060377591153011, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1681,7 +1682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6731665977528929680, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.29
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 6731665977528929680, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1711,19 +1712,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6750027905712481711, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
-      propertyPath: pCamera
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7963860877767316864, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
-      propertyPath: playerCamera
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4223625436257332766, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
+--- !u!4 &1926880941 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6478429053407404291, guid: 4fdf48e1cc6d1324980146e8b2a0b133, type: 3}
+  m_PrefabInstance: {fileID: 1926880940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2058386862 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4110333337300569028, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
@@ -1893,7 +1892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3846553647337688030, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 100.00003
+      value: 99.9992
       objectReference: {fileID: 0}
     - target: {fileID: 4110333337300569028, guid: 25eb60d477783e944a23a228e8ced56b, type: 3}
       propertyPath: m_Pivot.x

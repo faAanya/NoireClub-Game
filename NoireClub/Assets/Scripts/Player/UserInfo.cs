@@ -38,8 +38,17 @@ public class Friends
 {
     public List<string> names;
 }
+[Serializable]
+public class PlayerLook
+{
+    public Color color;
+    public int hat;
+
+    public int weapon;
+}
 public class UserInfo : MonoBehaviour
 {
+    public PlayerLook playerLook;
     public static Action<int> OnMoneyChange;
     public User user;
     public DealInfo dealInfo;

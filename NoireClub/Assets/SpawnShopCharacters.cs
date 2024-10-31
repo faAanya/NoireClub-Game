@@ -33,6 +33,8 @@ public class SpawnShopCharacters : MonoBehaviour
     public WCharacter listOfCharacters;
     public WCharacter? listOfPlayerCharacters;
 
+    public Transform placeTospawn;
+
     private void Awake()
     {
         StartCoroutine(WebConnect.Instance.GetAllCharacters());
@@ -50,7 +52,7 @@ public class SpawnShopCharacters : MonoBehaviour
         {
             GameObject newCharacter = Instantiate(characterButtons, transform);
             newCharacter.transform.GetChild(0).GetComponent<TMP_Text>().text = item.name;
-            newCharacter.GetComponent<Button>().onClick.AddListener(SpawnCharacter);
+            newCharacter.GetComponent<Button>().onClick.AddListener(() => { SpawnCharacter(item.id - 1); });
             newCharacter.GetComponent<Button>().interactable = false;
 
             newCharacter.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() =>
@@ -80,14 +82,16 @@ public class SpawnShopCharacters : MonoBehaviour
         }
 
     }
-    public void BuyProduct(int i)
+    public void SpawnCharacter(int i)
     {
+        for (int j = 0; j < placeTospawn.childCount; j++)
+        {
+            placeTospawn.GetChild(j).gameObject.SetActive(false);
+        }
+        placeTospawn.GetChild(i).gameObject.SetActive(true);
 
-    }
+        WebConnectController.Instance.userInfo.playerLook.weapon = i;
 
-    public void SpawnCharacter()
-    {
-        Debug.Log("Spawn");
     }
 }
 

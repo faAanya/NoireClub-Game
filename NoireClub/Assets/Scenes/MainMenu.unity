@@ -3110,6 +3110,7 @@ MonoBehaviour:
   categoriesInfo: {fileID: 0}
   productSpawner: {fileID: 0}
   playerProductSpawner: {fileID: 0}
+  spawnShopCharacters: {fileID: 0}
 --- !u!1 &825085210
 GameObject:
   m_ObjectHideFlags: 0
@@ -6376,6 +6377,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09a9dd76ca0dd304bb94c9ce989115f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerLook:
+    color: {r: 0, g: 0, b: 0, a: 0}
+    hat: 0
+    weapon: 0
   user:
     player_id: 
     player_name: 

@@ -20,9 +20,8 @@ public class PlayerSetup : MonoBehaviour
 
         weaponController.enabled = true;
         playerMovement.enabled = true;
+        setPlayerLook.enabled = true;
         playerCamera.SetActive(true);
-
-        // setPlayerLook.enabled = true;
 
     }
 

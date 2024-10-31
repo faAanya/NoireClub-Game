@@ -1,44 +1,43 @@
 using System.IO;
 using Photon.Pun;
+using Unity.XR.OpenVR;
 using UnityEngine;
 
 public class SetPlayerLook : MonoBehaviour
 {
-    public GameObject hat;
-    public ShopDealInfo shopDealInfo;
 
-    public void Load()
+    private void Start()
     {
-        string dataToLoad = "";
-        using (FileStream stream = new FileStream("shop.json", FileMode.OpenOrCreate))
-        {
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                dataToLoad = reader.ReadToEnd();
-            }
-        }
-        shopDealInfo = new ShopDealInfo();
-        shopDealInfo = JsonUtility.FromJson<ShopDealInfo>(dataToLoad);
+        SetPlayerLookHat(WebConnectController.Instance.userInfo.playerLook.hat);
+        SetPlayerLookWeapon(WebConnectController.Instance.userInfo.playerLook.weapon);
+        gameObject.GetComponent<PhotonView>().RPC("SetPlayerLookHatRPC", RpcTarget.OthersBuffered, WebConnectController.Instance.userInfo.playerLook.hat);
+        gameObject.GetComponent<PhotonView>().RPC("SetPlayerLookWeaponRPC", RpcTarget.AllBuffered, WebConnectController.Instance.userInfo.playerLook.weapon);
     }
 
-
-    void Awake()
+    [PunRPC]
+    public void SetPlayerLookHatRPC(int hatIndex)
     {
-        Load();
+        SetPlayerLookHat(hatIndex);
     }
 
+    public void SetPlayerLookHat(int hatIndex)
+    {
+        // PhotonNetwork.LocalPlayer.ActorNumber
+        gameObject.transform.GetChild(0).transform.GetChild(hatIndex).gameObject.SetActive(true);
 
-    public void SetPlayerLookFunc()
+        Debug.Log("Set player hat");
+    }
+    [PunRPC]
+    public void SetPlayerLookWeaponRPC(int weaponIndex)
     {
 
-        gameObject.GetComponent<MeshRenderer>().material.color = shopDealInfo.color;
+        SetPlayerLookWeapon(weaponIndex);
+    }
+    public void SetPlayerLookWeapon(int weaponIndex)
+    {
 
-        GameObject cloth = PhotonNetwork.Instantiate(shopDealInfo.hat.name, gameObject.transform.GetChild(0).gameObject.transform.position, Quaternion.identity);
+        gameObject.transform.GetChild(1).transform.GetChild(weaponIndex).gameObject.SetActive(true);
 
-        cloth.transform.SetParent(transform.GetChild(0).gameObject.transform);
-
-        Debug.Log("Set player look");
-
-
+        Debug.Log("Set player weapon");
     }
 }

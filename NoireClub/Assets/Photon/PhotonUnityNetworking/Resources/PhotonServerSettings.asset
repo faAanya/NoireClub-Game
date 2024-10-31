@@ -42,6 +42,10 @@ MonoBehaviour:
   - ChangeHealth
   - doEnable
   - SetPlayerLookFunc
+  - SetPlayerLookHat
+  - SetPlayerLookWeapon
+  - SetPlayerLookHatRPC
+  - SetPlayerLookWeaponRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

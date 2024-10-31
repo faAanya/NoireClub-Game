@@ -52,10 +52,28 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public void SpawnPlayer()
     {
         GameObject _player = PhotonNetwork.Instantiate(myPlayer.name, spawnPoint.transform.position, Quaternion.identity);
-        _player.transform.GetChild(0).GetComponent<PlayerHealth>().isLocalPlayer = true;
-        // transform.GetChild(0).gameObject.GetComponent<PhotonView>().RPC("SetPlayerLookFunc", RpcTarget.All);
-
         _player.GetComponent<PlayerSetup>().IsLocalPlayer();
+
+        _player.transform.GetChild(0).GetComponent<PlayerHealth>().isLocalPlayer = true;
+
+
+        Transform hat = _player.transform.GetChild(0).gameObject.transform.GetChild(0).transform;
+        Transform weapon = _player.transform.GetChild(0).gameObject.transform.GetChild(1).transform;
+
+        weapon.gameObject.GetComponent<WeaponController>().weaponClass = weapon.transform.GetChild(WebConnectController.Instance.userInfo.playerLook.weapon).GetComponent<WeaponClass>();
+        weapon.transform.GetChild(WebConnectController.Instance.userInfo.playerLook.weapon).gameObject.SetActive(true);
+
+        hat.transform.GetChild(WebConnectController.Instance.userInfo.playerLook.hat).gameObject.SetActive(true);
+
+        // _player.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.color = WebConnectController.Instance.userInfo.playerLook.color;
+
+
+        //         _player.transform.GetChild(0).gameObject.GetComponent<PhotonView>().RPC("SetPlayerLookFunc", RpcTarget.All,
+        //  WebConnectController.Instance.userInfo.playerLook.hat,
+        //  WebConnectController.Instance.userInfo.playerLook.weapon
+        //         );
+
+
     }
 
 }

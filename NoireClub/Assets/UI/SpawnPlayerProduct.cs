@@ -85,16 +85,8 @@ public class SpawnPlayerProduct : MonoBehaviour
             activePlayer.transform.GetChild(0).gameObject.GetComponent<Renderer>().sharedMaterial.color = newCol;
             // WebConnectController.Instance.userInfo.playerPrefab.transform.GetChild(0).gameObject.GetComponent<Renderer>().sharedMaterial.color = newCol;
             // PrefabUtility.ApplyPrefabInstance(WebConnectController.Instance.userInfo.playerPrefab, InteractionMode.UserAction);
+            WebConnectController.Instance.userInfo.playerLook.color = newCol;
 
-            shopDealInfo.color = newCol;
-            string json = JsonUtility.ToJson(shopDealInfo);
-            using (FileStream stream = new FileStream(WebConnectController.Instance.userInfo.json, FileMode.Create))
-            {
-                using (StreamWriter writer = new StreamWriter(stream))
-                {
-                    writer.Write(json);
-                }
-            }
         }
 
         Debug.Log("Change color");
@@ -110,36 +102,23 @@ public class SpawnPlayerProduct : MonoBehaviour
 
         if (product.GetComponent<ProductController>().product.characteristic == "#3f2821")
         {
-            if (activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.childCount == 0)
+            for (int i = 0; i < activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.childCount; i++)
             {
-                GameObject cloth = Instantiate(hats[0], activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform);
+                activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(i).gameObject.SetActive(false);
             }
-            else
-            {
-                for (int i = 0; i < activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.childCount; i++)
-                {
-                    Destroy(activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(i).gameObject);
-                }
-                GameObject cloth = Instantiate(hats[0], activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform);
-
-            }
+            activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
+            WebConnectController.Instance.userInfo.playerLook.hat = 0;
 
         }
         else if (product.GetComponent<ProductController>().product.characteristic == "#A88d6d")
         {
-            if (activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.childCount == 0)
+            for (int i = 0; i < activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.childCount; i++)
             {
-                GameObject cloth = Instantiate(hats[1], activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform);
+                activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(i).gameObject.SetActive(false);
             }
-            else
-            {
-                for (int i = 0; i < activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.childCount; i++)
-                {
-                    Destroy(activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(i).gameObject);
-                }
-                GameObject cloth = Instantiate(hats[1], activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform);
+            activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true);
+            WebConnectController.Instance.userInfo.playerLook.hat = 1;
 
-            }
         }
 
     }
