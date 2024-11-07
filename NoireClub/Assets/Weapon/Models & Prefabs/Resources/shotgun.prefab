@@ -495,7 +495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7682213458616953240
 Transform:
   m_ObjectHideFlags: 0
@@ -528,8 +528,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActiveWeapon: 1
   bullet: {fileID: 1556352359394094858, guid: 9176171bc88fe4208ac5246313b0af81, type: 3}
-  amountOfBullets: 5
-  bulletSpeed: 10
+  amountOfBullets: 1
+  bulletSpeed: 40
   weaponMaxDistance: 3
   player: {fileID: 0}
   placeFromSpawn: {fileID: 5483035339972332114}

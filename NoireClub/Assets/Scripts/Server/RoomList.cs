@@ -11,7 +11,7 @@ public class RoomList : MonoBehaviourPunCallbacks
 {
     public static RoomList Instance;
     public Transform roomListParent;
-    public GameObject roomListPrefab, roomManagetGameObject, playerList;
+    public GameObject roomListPrefab, roomManagetGameObject, playerList, star;
 
     public RoomManager roomManager;
 
@@ -35,6 +35,7 @@ public class RoomList : MonoBehaviourPunCallbacks
     {
         Instance = this;
         ExitButton.onClick.AddListener(() => { SceneManager.LoadScene(0); });
+        star.SetActive(true);
 
     }
     IEnumerator Start()
@@ -115,5 +116,6 @@ public class RoomList : MonoBehaviourPunCallbacks
         roomManager.gameObject.SetActive(true);
         playerList.SetActive(true);
         gameObject.SetActive(false);
+        star.SetActive(false);
     }
 }

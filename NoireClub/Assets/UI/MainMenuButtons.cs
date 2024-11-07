@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MainMenuButtons : MonoBehaviour
 {
-    public Button startButton, shopButton, accountSettingsButton;
+    public Button startButton, shopButton, accountSettingsButton, exitButton;
 
     public GameObject AccountMenu, GamePlayButtons;
 
@@ -18,5 +18,6 @@ public class MainMenuButtons : MonoBehaviour
         {
             SceneManager.LoadScene(2);
         });
+        exitButton.onClick.AddListener(() => { Application.Quit(); });
     }
 }

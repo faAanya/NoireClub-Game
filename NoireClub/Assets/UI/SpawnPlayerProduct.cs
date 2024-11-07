@@ -85,7 +85,7 @@ public class SpawnPlayerProduct : MonoBehaviour
             activePlayer.transform.GetChild(0).gameObject.GetComponent<Renderer>().sharedMaterial.color = newCol;
             // WebConnectController.Instance.userInfo.playerPrefab.transform.GetChild(0).gameObject.GetComponent<Renderer>().sharedMaterial.color = newCol;
             // PrefabUtility.ApplyPrefabInstance(WebConnectController.Instance.userInfo.playerPrefab, InteractionMode.UserAction);
-            WebConnectController.Instance.userInfo.playerLook.color = newCol;
+            WebConnectController.Instance.userInfo.playerLook.color = product.GetComponent<ProductController>().product.characteristic;
 
         }
 
@@ -106,8 +106,8 @@ public class SpawnPlayerProduct : MonoBehaviour
             {
                 activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(i).gameObject.SetActive(false);
             }
-            activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(true);
-            WebConnectController.Instance.userInfo.playerLook.hat = 0;
+            activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true);
+            WebConnectController.Instance.userInfo.playerLook.hat = 1;
 
         }
         else if (product.GetComponent<ProductController>().product.characteristic == "#A88d6d")
@@ -116,8 +116,8 @@ public class SpawnPlayerProduct : MonoBehaviour
             {
                 activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(i).gameObject.SetActive(false);
             }
-            activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(1).gameObject.SetActive(true);
-            WebConnectController.Instance.userInfo.playerLook.hat = 1;
+            activePlayer.transform.GetChild(0).gameObject.transform.GetChild(0).transform.GetChild(2).gameObject.SetActive(true);
+            WebConnectController.Instance.userInfo.playerLook.hat = 2;
 
         }
 

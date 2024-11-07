@@ -41,7 +41,7 @@ public class Friends
 [Serializable]
 public class PlayerLook
 {
-    public Color color;
+    public string color;
     public int hat;
 
     public int weapon;
@@ -68,6 +68,7 @@ public class UserInfo : MonoBehaviour
     void Start()
     {
 
+        StartCoroutine(WebConnectController.Instance.webConnect.AddFriend(WebConnectController.Instance.userInfo.user.player_name, WebConnectController.Instance.userInfo.user.player_name));
 
     }
     public void SetId(string id, string userName)
@@ -88,15 +89,15 @@ public class UserInfo : MonoBehaviour
         Debug.Log("Got Player Info");
 
 
-        string dataToStore = JsonUtility.ToJson(user, true);
+        // string dataToStore = JsonUtility.ToJson(user, true);
 
-        using (FileStream stream = new FileStream("saver.json", FileMode.Create))
-        {
-            using (StreamWriter writer = new StreamWriter(stream))
-            {
-                writer.Write(dataToStore);
-            }
-        }
+        // using (FileStream stream = new FileStream("saver.json", FileMode.Create))
+        // {
+        //     using (StreamWriter writer = new StreamWriter(stream))
+        //     {
+        //         writer.Write(dataToStore);
+        //     }
+        // }
         yield return null;
     }
 

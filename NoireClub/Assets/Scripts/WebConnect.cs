@@ -72,6 +72,9 @@ public class WebConnect : MonoBehaviour
             Debug.Log(www.downloadHandler.text);
 
             WebConnectController.Instance.userInfo.SetId(www.downloadHandler.text, userName);
+            StartCoroutine(AddFriend(WebConnectController.Instance.userInfo.user.player_name, WebConnectController.Instance.userInfo.user.player_name));
+
+            SpawnFriends.spawnFriends.Spawn();
 
         }
 

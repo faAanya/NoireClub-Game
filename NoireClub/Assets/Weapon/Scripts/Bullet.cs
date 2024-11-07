@@ -18,10 +18,11 @@ public class BulletController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Damage: " + damage);
 
         if (other.gameObject.GetComponent<PlayerHealth>() != null)
         {
+            Debug.LogError("Damage: " + damage);
+            Debug.LogError(other.gameObject.name);
             other.gameObject.GetComponent<PhotonView>().RPC("ChangeHealth", RpcTarget.All, -damage);
             Destroy(gameObject);
 

@@ -22,4 +22,10 @@ public class PlayerHealth : MonoBehaviour
             Destroy(gameObject.transform.parent.gameObject);
         }
     }
+
+
+    void Update()
+    {
+
+    }
 }

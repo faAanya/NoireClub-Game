@@ -33,7 +33,7 @@ public class WeaponClass : MonoBehaviour, IWeaponClass
 
             GameObject _bullet = PhotonNetwork.Instantiate(bullet.name, placeFromSpawn.position, Quaternion.identity);
 
-            _bullet.GetComponent<Rigidbody>().AddForce((player.GetComponent<MoveObject>().lookAtPos + new Vector3((float)random.NextDouble(), placeFromSpawn.position.y, (float)random.NextDouble())).normalized * bulletSpeed, ForceMode.Impulse); //= (new Vector3(player.GetComponent<MoveObject>().pos.x + random.Next(-1, 2), placeFromSpawn.position.y, player.GetComponent<MoveObject>().pos.z + random.Next(-1, 2)) - placeFromSpawn.position)
+            _bullet.GetComponent<Rigidbody>().AddForce((player.GetComponent<MoveObject>().lookAtPos + new Vector3((float)random.NextDouble(), 0, (float)random.NextDouble())).normalized * bulletSpeed, ForceMode.Impulse); //= (new Vector3(player.GetComponent<MoveObject>().pos.x + random.Next(-1, 2), placeFromSpawn.position.y, player.GetComponent<MoveObject>().pos.z + random.Next(-1, 2)) - placeFromSpawn.position)
 
             _bullet.GetComponent<BulletController>().weaponClass = this;
             _bullet.GetComponent<BulletController>().livingTime = livingTime;

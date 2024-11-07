@@ -58,7 +58,7 @@ public class MoveObject : MonoBehaviour
             }
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * 5f);
+        transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * 3f);
 
         transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * 8);
 

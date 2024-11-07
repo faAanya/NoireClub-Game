@@ -10,8 +10,11 @@ public class SetPlayerLook : MonoBehaviour
     {
         SetPlayerLookHat(WebConnectController.Instance.userInfo.playerLook.hat);
         SetPlayerLookWeapon(WebConnectController.Instance.userInfo.playerLook.weapon);
-        gameObject.GetComponent<PhotonView>().RPC("SetPlayerLookHatRPC", RpcTarget.OthersBuffered, WebConnectController.Instance.userInfo.playerLook.hat);
+        SetPlayerLookColor(WebConnectController.Instance.userInfo.playerLook.color);
+        gameObject.GetComponent<PhotonView>().RPC("SetPlayerLookHatRPC", RpcTarget.AllBuffered, WebConnectController.Instance.userInfo.playerLook.hat);
         gameObject.GetComponent<PhotonView>().RPC("SetPlayerLookWeaponRPC", RpcTarget.AllBuffered, WebConnectController.Instance.userInfo.playerLook.weapon);
+        gameObject.GetComponent<PhotonView>().RPC("SetPlayerLookColorRPC", RpcTarget.AllBuffered, WebConnectController.Instance.userInfo.playerLook.color);
+
     }
 
     [PunRPC]
@@ -39,5 +42,19 @@ public class SetPlayerLook : MonoBehaviour
         gameObject.transform.GetChild(1).transform.GetChild(weaponIndex).gameObject.SetActive(true);
 
         Debug.Log("Set player weapon");
+    }
+
+    [PunRPC]
+    public void SetPlayerLookColorRPC(string color)
+    {
+        SetPlayerLookColor(color);
+    }
+    public void SetPlayerLookColor(string color)
+    {
+        Color newCol;
+        if (ColorUtility.TryParseHtmlString(color, out newCol))
+        {
+            gameObject.GetComponent<Renderer>().material.color = newCol;
+        }
     }
 }

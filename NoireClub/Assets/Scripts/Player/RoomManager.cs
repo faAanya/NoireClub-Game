@@ -18,27 +18,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinOrCreateRoom(roomName, null, null);
     }
 
-
-
-    // public override void OnConnectedToMaster()
-    // {
-    //     base.OnConnectedToMaster();
-
-    //     Debug.Log("Connected to Server");
-
-    //     PhotonNetwork.JoinLobby();
-    // }
-
-    // public override void OnJoinedLobby()
-    // {
-    //     base.OnJoinedLobby();
-
-
-
-    //     Debug.Log("We are connected to the room");
-
-    // }
-
     public override void OnJoinedRoom()
     {
         Debug.Log("Joined room");
@@ -64,16 +43,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         weapon.transform.GetChild(WebConnectController.Instance.userInfo.playerLook.weapon).gameObject.SetActive(true);
 
         hat.transform.GetChild(WebConnectController.Instance.userInfo.playerLook.hat).gameObject.SetActive(true);
-
-        // _player.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material.color = WebConnectController.Instance.userInfo.playerLook.color;
-
-
-        //         _player.transform.GetChild(0).gameObject.GetComponent<PhotonView>().RPC("SetPlayerLookFunc", RpcTarget.All,
-        //  WebConnectController.Instance.userInfo.playerLook.hat,
-        //  WebConnectController.Instance.userInfo.playerLook.weapon
-        //         );
-
-
     }
 
 }

@@ -9,11 +9,11 @@ public class FileDataHandler : MonoBehaviour
     public static FileDataHandler Instance;
     public UserInfo userInfo;
     private FileDataHandler dataHandler;
-    private void Start()
+    private void Awake()
     {
         userInfo = GetComponent<UserInfo>();
         Load();
-        StartCoroutine(WebConnectController.Instance.webConnect.AddFriend(userInfo.user.player_name, userInfo.user.player_name));
+
     }
 
 
