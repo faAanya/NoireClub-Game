@@ -281,8 +281,11 @@ public class WebConnect : MonoBehaviour
         }
         else
         {
+            Debug.Log(www.downloadHandler.text);
+
             FavoriteServersController.Instance.wServer = new WServer();
             FavoriteServersController.Instance.wServer = JsonUtility.FromJson<WServer>(www.downloadHandler.text);
+            FavoriteServersController.Instance.SpawnButtons();
         }
     }
 
@@ -410,6 +413,7 @@ public class WebConnect : MonoBehaviour
                 WebConnectController.Instance.spawnShopCharacters.listOfPlayerCharacters = new WCharacter();
                 WebConnectController.Instance.spawnShopCharacters.listOfPlayerCharacters = JsonUtility.FromJson<WCharacter>(www.downloadHandler.text);
             }
+            UserInfo.OnMoneyChange?.Invoke(WebConnectController.Instance.userInfo.user.money);
 
             // WebConnectController.Instance.spawnShopCharacters.SetButtons();
 

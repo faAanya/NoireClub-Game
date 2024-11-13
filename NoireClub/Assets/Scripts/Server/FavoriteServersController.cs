@@ -18,14 +18,15 @@ public class FavoriteServersController : MonoBehaviour
     {
         Instance = this;
 
-    }
 
-    void Start()
-    {
-        openFServers.onClick.AddListener(() => { SpawnButtons(); });
-        StartCoroutine(WebConnectController.Instance.webConnect.GetPlayerServers(Convert.ToInt32(WebConnectController.Instance.userInfo.user.player_id)));
+        openFServers.onClick.AddListener(() =>
+        {
+            StartCoroutine(WebConnectController.Instance.webConnect.GetPlayerServers(Convert.ToInt32(WebConnectController.Instance.userInfo.user.player_id)));
+        });
         closeServers.onClick.AddListener(() => { DeleteButtons(); });
     }
+
+
 
     public void DeleteButtons()
     {

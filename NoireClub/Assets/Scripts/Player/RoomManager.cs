@@ -22,10 +22,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("Joined room");
         base.OnJoinedRoom();
-        SpawnPlayer();
+
 
         PhotonNetwork.LocalPlayer.NickName = WebConnectController.Instance.userInfo.user.player_name;
         Debug.LogError(PhotonNetwork.LocalPlayer.NickName);
+
+        SpawnPlayer();
     }
 
     public void SpawnPlayer()
